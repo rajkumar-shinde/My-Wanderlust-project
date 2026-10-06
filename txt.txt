@@ -1,0 +1,118 @@
+mongoose
+  .connect("mongodb://127.0.0.1:27017/wanderlst")
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
+
+const UserSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+  },
+  email: {
+    required: true,
+    type: String,
+  },
+});
+
+//
+const India = mongoose.model("america", UserSchema);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+is file ko structured karo and dedo const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
+const listings = require("./routes/listing");
+const reviews = require("./routes/review");
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
+app.use("/listings", listings);
+app.use("/listings/:id/reviews", reviews);
+const app = express();
+const sessionOptions = {
+  secret: "mysecretcode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 \* 24 \* 60 \* 60 \* 1000,
+    maxAge: 7 \* 24 \* 60 \* 60 \* 1000,
+    httpOnly: true,
+  },
+};
+*// EJS-Mate setup*
+app.engine("ejs", ejsMate);
+*// EJS setup*
+app.set("view engine", "ejs");
+app.set("views", "./views");
+
+*// Middleware*
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("\_method"));
+app.use(express.static(path.join(\_\_dirname, "public")));
+app.use(session(sessionOptions));
+app.use(flash());
+
+*// Connect MongoDB*
+async function connectDB() {
+  await mongoose.connect("mongodb://127.0.0.1:27017/wanderlst");
+}
+
+connectDB()
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+*// ==================== ROUTES ====================*
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
+*// Home route*
+app.get("/", (req, res) => {
+  console.log(req.session);
+  res.status(200).send("working properly");
+});
+
+*// ==================== MIDDLEWARE ====================*
+app.use((err, req, res, next) => {
+  let { status = 500, message = "something wrong" } = err;
+  res.status(status).render("./listings/error.ejs", { err });
+  *// res.status(status).send(message);*
+});
+
+app.listen(8000, () => {
+  console.log("App is listening on port 8000....");
+});
+
+*// const Listing = require("./models/listing");*
+*// const ejs = require("ejs");*
+*// const wrapAsync = require("./utils/wrapAsync");*
+*// const ExpressError = require("./utils/ExpressError");*
+*// const { listingSchema, reviewSchema } = require("./schema");*
+*// const Review = require("./models/review");*
