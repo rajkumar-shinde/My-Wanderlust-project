@@ -16,7 +16,7 @@ const listingSchema = new mongoose.Schema({
     url: {
       type: String,
       default:
-        "https://cdn.britannica.com/48/252748-050-C514EFDB/Virat-Kohli-India-celebrates-50th-century-Cricket-November-15-2023.jpg",
+        "https://lesroches.edu/wp-content/uploads/2023/03/What-is-innovation-in-hotels-1-scaled.jpg",
     },
   },
   price: {
@@ -39,6 +39,10 @@ const listingSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {

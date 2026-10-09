@@ -55,24 +55,6 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
-
-// app.get("/demo", async (req, res, next) => {
-//   try {
-//     const demouser = new User({
-//       email: "Raj@gmail.com",
-//       username: "apnacollege",
-//     });
-
-//     const registereduser = await User.register(demouser, "rajkumar");
-//     res.send(registereduser);
-//   } catch (err) {
-//     if (err.code === 11000) {
-//       req.flash("error", "Email already registered!");
-//       return res.redirect("/listings");
-//     }
-//     next(err);
-//   }
-// });
 // ==================== DATABASE CONNECTION ====================
 async function connectDB() {
   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlst");
@@ -105,3 +87,21 @@ app.use((err, req, res, next) => {
 app.listen(8000, () => {
   console.log("App is listening on port 8000...");
 });
+
+// app.get("/demo", async (req, res, next) => {
+//   try {
+//     const demouser = new User({
+//       email: "Raj@gmail.com",
+//       username: "apnacollege",
+//     });
+
+//     const registereduser = await User.register(demouser, "rajkumar");
+//     res.send(registereduser);
+//   } catch (err) {
+//     if (err.code === 11000) {
+//       req.flash("error", "Email already registered!");
+//       return res.redirect("/listings");
+//     }
+//     next(err);
+//   }
+// });
