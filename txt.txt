@@ -116,3 +116,8 @@ app.listen(8000, () => {
 *// const ExpressError = require("./utils/ExpressError");*
 *// const { listingSchema, reviewSchema } = require("./schema");*
 *// const Review = require("./models/review");*
+
+
+
+https://chatgpt.com/s/t_6ac794f094c08191b20ca0a389e6d757
+
