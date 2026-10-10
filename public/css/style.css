@@ -199,3 +199,59 @@ body {
 .search-bar form button:hover {
   opacity: 1;
 }
+
+/* button login and  sign up */
+/* .btn-brand {
+  background-color: #fe424d;
+  border-color: #fe424d;
+  color: #fff;
+}
+
+.btn-brand:hover,
+.btn-brand:focus {
+  background-color: #e0353f;
+  border-color: #e0353f;
+  color: #fff;
+} */
+
+/* Sign Up */
+.wl-signup {
+  color: #ff385c !important;
+  border: 1px solid #ff385c;
+  border-radius: 8px;
+  padding: 8px 16px !important;
+  transition: 0.3s ease;
+}
+
+.wl-signup:hover {
+  background-color: #ff385c;
+  color: white !important;
+}
+
+/* Log In */
+.wl-login {
+  color: #333 !important;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 16px !important;
+  transition: 0.3s ease;
+}
+
+.wl-login:hover {
+  background-color: #333;
+  color: white !important;
+}
+
+/* LogOut */
+.wl-logout {
+  color: #dc3545 !important;
+  border: 1px solid #dc3545;
+  border-radius: 8px;
+  padding: 8px 16px !important;
+  transition: 0.3s ease;
+}
+
+.wl-logout:hover {
+  background-color: #dc3545;
+  color: white !important;
+}

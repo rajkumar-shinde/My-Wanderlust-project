@@ -24,11 +24,11 @@
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
         <%if(!currentUser){%>
-        <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-        <a class="nav-link" href="/login"><b>Log In</b></a>
+        <a class="nav-link wl-signup" href="/signup"><b>Sign Up</b></a>
+        <a class="nav-link wl-login" href="/login"><b>Log In</b></a>
         <%  }%>
         <%if(currentUser){%>
-        <a class="nav-link" href="/logout">LogOut</a>
+        <a class="nav-link wl-logout" href="/logout">LogOut</a>
         <%  }%>
       </div>
     </div>
