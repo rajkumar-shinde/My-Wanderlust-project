@@ -1,20 +1,41 @@
+require("dotenv").config(); // Load environment variables
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
+const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
+const { MongoStore } = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
+// Database URL
+const dburl = process.env.ATLAS_URL;
+
+// Models and routes
 const User = require("./models/user");
 const listingRouter = require("./routes/listing");
 const reviewRouter = require("./routes/review");
 const userRouter = require("./routes/user");
-// ==================== SESSION OPTIONS ====================
+
+const store = MongoStore.create({
+  mongoUrl: dburl,
+  crypto: {
+    secret: "mysecretcode",
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", (err) => {
+  console.log("error in MONGO_SESSION_STORE", err);
+});
+// Session options
 const sessionOptions = {
+  store,
   secret: "mysecretcode",
   resave: false,
   saveUninitialized: true,
@@ -25,40 +46,41 @@ const sessionOptions = {
   },
 };
 
-// ==================== EJS SETUP ====================
+// EJS setup
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-// ==================== GENERAL MIDDLEWARE ====================
+// General middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-// ==================== SESSION & FLASH ====================
+// Session and flash
 app.use(session(sessionOptions));
 app.use(flash());
 
-// ==================== PASSPORT CONFIGURATION ====================
+// Passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new LocalStrategy(User.authenticate()));
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// ==================== GLOBAL LOCALS ====================
+// Global locals
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currentUser = req.user;
   next();
 });
-// ==================== DATABASE CONNECTION ====================
+
+// Database connection
 async function connectDB() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/wanderlst");
+  await mongoose.connect(dburl);
 }
+
 connectDB()
   .then(() => {
     console.log("MongoDB connected");
@@ -67,34 +89,39 @@ connectDB()
     console.log(err);
   });
 
-// ==================== ROUTES ====================
-app.get("/", (req, res) => {
-  res.status(200).send("Wanderlust is working properly");
-});
+// Routes
+// app.get("/", (req, res) => {
+//   res.status(200).send("Wanderlust is working properly");
+// });
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// ==================== ERROR HANDLING ====================
+// Error handling
+app.all("/{*splat}", (req, res, next) => {
+  next(new ExpressError(404, "Page not Found!"));
+});
+
 app.use((err, req, res, next) => {
   let { status = 500, message = "something wrong" } = err;
   res.status(status).render("./listings/error.ejs", { err });
   // res.status(status).send(message);
 });
 
-// ==================== SERVER ====================
+// Server
 app.listen(8000, () => {
   console.log("App is listening on port 8000...");
 });
 
+// Demo route
 // app.get("/demo", async (req, res, next) => {
 //   try {
 //     const demouser = new User({
 //       email: "Raj@gmail.com",
 //       username: "apnacollege",
 //     });
-
+//
 //     const registereduser = await User.register(demouser, "rajkumar");
 //     res.send(registereduser);
 //   } catch (err) {

@@ -13,11 +13,8 @@ const listingSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    url: {
-      type: String,
-      default:
-        "https://lesroches.edu/wp-content/uploads/2023/03/What-is-innovation-in-hotels-1-scaled.jpg",
-    },
+    url: String,
+    filename: String,
   },
   price: {
     type: Number,
@@ -42,6 +39,17 @@ const listingSchema = new mongoose.Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User",
+  },
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
   },
 });
 

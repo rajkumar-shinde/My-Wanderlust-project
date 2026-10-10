@@ -119,3 +119,83 @@ body {
   text-align: center;
   font-size: large;
 }
+
+/* MAP */
+#map {
+  height: 400px;
+  width: 80vh;
+}
+
+/*Filters*/
+
+.filter {
+  font-size: 1rem;
+  margin-right: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  opacity: 0.5;
+}
+
+.filter:hover {
+  opacity: 1;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tax-container {
+  /* margin-top: 2rem;
+    padding-top:0.7rem;
+    padding-right: 1rem;
+    border-radius: 1rem;
+    border:1px solid black;
+    height:3rem;
+    margin-left: 3rem;
+    display:inline-block;
+    padding-left: 1rem;;
+     */
+  border: 1px solid black;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.form-check-input {
+  padding-right: 1rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+}
+
+.tax-info {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .filters .filter:nth-child(n + 5) {
+    display: none; /* hide filters after the 4th one */
+  }
+}
+
+.search-bar form button {
+  background-color: #fe424d !important;
+  border-radius: 25px;
+  color: white !important;
+  padding: 0 1rem 0 1rem;
+  opacity: 0.9;
+}
+
+.search-bar form input {
+  border-radius: 25px;
+  padding: 0.4rem 3rem 0.4rem 3rem;
+  font-size: 1rem;
+}
+
+.search-bar form button:hover {
+  opacity: 1;
+}

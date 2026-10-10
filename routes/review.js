@@ -9,38 +9,20 @@ const {
   isReviewAuthor,
 } = require("../middleware.js");
 
+const reviewController = require("../controllers/reviews.js");
 // Create review
 router.post(
   "/",
   isLoggedIn,
   validatereview,
-  wrapAsync(async (req, res) => {
-    const id = req.params.id;
-    const listing = await Listing.findById(id);
-    const newReview = new Review(req.body.review);
-
-    newReview.author = req.user._id;
-    console.log(req.body.review);
-
-    listing.reviews.push(newReview);
-    await newReview.save();
-    await listing.save();
-    req.flash("success", "new review created");
-    res.redirect(`/listings/${id}`);
-  }),
+  wrapAsync(reviewController.createReview),
 );
 // delete review route
 router.delete(
   "/:reviewId",
   isLoggedIn,
   isReviewAuthor,
-  wrapAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-    await Review.findByIdAndDelete(reviewId);
-    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    req.flash("success", "review deleted");
-    res.redirect(`/listings/${id}`);
-  }),
+  wrapAsync(reviewController.destroyReview),
 );
 //
 module.exports = router;

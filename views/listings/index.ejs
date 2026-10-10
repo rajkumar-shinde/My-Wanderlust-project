@@ -2,8 +2,51 @@
         <button>create new Route</button>
     </form> -->    
 <% layout("layouts/boilerplate") %>
-<h3>All Listings</h3>
-<br>
+<!-- <h3>All Listings</h3> -->
+     <div class="filters ms-2 container-md">
+        <div class="filter">
+            <i class="fa-solid fa-fire ms-3 mt-3"></i><br>
+            Trending
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-bed ms-3 mt-3"></i><br>
+            Rooms
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-mountain-city ms-3 mt-3"></i><br>
+            Iconic Cities
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-mountain ms-3 mt-3"></i><br>
+            Mountains
+        </div>
+        <div class="filter">
+            <i class="fa fa-university ms-3 mt-3"></i><br>
+            Palaces
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-person-swimming ms-3 mt-3"></i><br>
+            Pools
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-ship ms-3 mt-3"></i><br>
+            Boating
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-campground ms-3 mt-3"></i><br>
+            Camping
+        </div>
+        <div class="filter">
+            <i class="fa-solid fa-cow ms-3 mt-3"></i><br>
+            Farms
+        </div>
+        <div class="tax-container">
+            <div class="form-check-reverse form-switch mt-3 ">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" class="tax-switch">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Show Price With Taxes</label>
+            </div>
+        </div>
+    </div>    
 <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-2">
   <% for (let listing of alllistings) { %>
     <a href="/listings/<%= listing._id %>" class="listing-link">
@@ -22,6 +65,7 @@
           <p class="card-text">
             <b><%= listing.title %></b><br>
            <b>&#x20B9;<%= listing.price.toLocaleString("en-IN") %> </b>/night 
+           &nbsp;&nbsp;<i class="tax-info">+ 18% GST</i>
           </p>
         </div>
       </div>
@@ -29,3 +73,19 @@
     </a>
   <% } %>
 </div>
+
+
+
+<script>
+    let checkbox = document.getElementById("flexSwitchCheckDefault");
+    checkbox.addEventListener("click",()=>{
+        let taxinfo = document.getElementsByClassName("tax-info");
+        for(info of taxinfo){
+            if(info.style.display != "inline"){
+                info.style.display = "inline";
+            }else{
+                info.style.display = "none";
+            }
+        }
+    })
+</script>
