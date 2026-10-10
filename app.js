@@ -25,7 +25,7 @@ const userRouter = require("./routes/user");
 const store = MongoStore.create({
   mongoUrl: dburl,
   crypto: {
-    secret: "mysecretcode",
+    secret: process.env.SECRET,
   },
   touchAfter: 24 * 3600,
 });
@@ -36,7 +36,7 @@ store.on("error", (err) => {
 // Session options
 const sessionOptions = {
   store,
-  secret: "mysecretcode",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -90,9 +90,9 @@ connectDB()
   });
 
 // Routes
-// app.get("/", (req, res) => {
-//   res.status(200).send("Wanderlust is working properly");
-// });
+app.get("/", (req, res) => {
+  res.render("listings/home.ejs");
+});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);

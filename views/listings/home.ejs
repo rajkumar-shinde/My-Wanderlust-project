@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wanderlust | Find stays worth travelling for</title>
+    <meta
+      name="description"
+      content="Browse homes, villas, cabins and hotels across the world on Wanderlust."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --ink: #10253a;
+        --sun: #ffb703;
+        --white: #ffffff;
+        --display: "Bricolage Grotesque", "Segoe UI", sans-serif;
+        --body: "DM Sans", "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        font-family: var(--body);
+        color: var(--white);
+        background: var(--ink);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 clamp(24px, 6vw, 90px) clamp(48px, 9vh, 90px);
+        background:
+          linear-gradient(
+            180deg,
+            rgba(16, 37, 58, 0.5) 0%,
+            rgba(16, 37, 58, 0.1) 40%,
+            rgba(16, 37, 58, 0.85) 100%
+          ),
+          url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80")
+            center/cover no-repeat;
+        background-color: var(--ink);
+      }
+
+      .brand {
+        position: absolute;
+        top: 28px;
+        left: clamp(24px, 6vw, 90px);
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .brand i {
+        color: var(--sun);
+      }
+
+      h1 {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: clamp(3rem, 9vw, 7rem);
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+        margin: 0 0 22px;
+        max-width: 12ch;
+      }
+      h1 span {
+        display: block;
+      }
+
+      .lead-text {
+        font-size: clamp(1.05rem, 2vw, 1.3rem);
+        max-width: 44ch;
+        color: rgba(255, 255, 255, 0.88);
+        margin: 0 0 34px;
+      }
+
+      .btn-explore {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--sun);
+        color: var(--ink);
+        font-family: var(--body);
+        font-weight: 500;
+        font-size: 1.15rem;
+        text-decoration: none;
+        padding: 18px 42px;
+        border-radius: 999px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .btn-explore:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      }
+      .btn-explore:focus-visible {
+        outline: 3px solid var(--white);
+        outline-offset: 4px;
+      }
+
+      /* page-load reveal */
+      h1 span,
+      .lead-text,
+      .btn-explore {
+        opacity: 0;
+        transform: translateY(36px);
+        animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      h1 span:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      h1 span:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .lead-text {
+        animation-delay: 0.5s;
+      }
+      .btn-explore {
+        animation-delay: 0.65s;
+      }
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        h1 span,
+        .lead-text,
+        .btn-explore {
+          animation: none;
+          opacity: 1;
+          transform: none;
+        }
+        .btn-explore {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="hero">
+      <div class="brand"><i class="bi bi-compass"></i> Wanderlust</div>
+
+      <h1>
+        <span>Stay</span>
+        <span>somewhere</span>
+        <span>unforgettable.</span>
+      </h1>
+      <p class="lead-text">
+        Beach houses, mountain cabins, city lofts and quiet villas. Find a
+        place, read real reviews, and plan your next trip.
+      </p>
+
+      <a href="/listings" class="btn-explore"
+        >Explore <i class="bi bi-arrow-right"></i
+      ></a>
+    </main>
+  </body>
+</html>
