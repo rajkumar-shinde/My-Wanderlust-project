@@ -1,52 +1,52 @@
-    <!-- <form method="GET" action="/listings/new">
-        <button>create new Route</button>
-    </form> -->    
 <% layout("layouts/boilerplate") %>
 <!-- <h3>All Listings</h3> -->
-     <div class="filters ms-2 container-md">
+     <div class="filters-wrapper container-md">
+    <div class="filters-scroll">
         <div class="filter">
-            <i class="fa-solid fa-fire ms-3 mt-3"></i><br>
-            Trending
+            <i class="fa-solid fa-fire"></i>
+            <p>Trending</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-bed ms-3 mt-3"></i><br>
-            Rooms
+            <i class="fa-solid fa-bed"></i>
+            <p>Rooms</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-mountain-city ms-3 mt-3"></i><br>
-            Iconic Cities
+            <i class="fa-solid fa-mountain-city"></i>
+            <p>Iconic Cities</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-mountain ms-3 mt-3"></i><br>
-            Mountains
+            <i class="fa-solid fa-mountain"></i>
+            <p>Mountains</p>
         </div>
         <div class="filter">
-            <i class="fa fa-university ms-3 mt-3"></i><br>
-            Palaces
+            <i class="fa fa-university"></i>
+            <p>Palaces</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-person-swimming ms-3 mt-3"></i><br>
-            Pools
+            <i class="fa-solid fa-person-swimming"></i>
+            <p>Pools</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-ship ms-3 mt-3"></i><br>
-            Boating
+            <i class="fa-solid fa-ship"></i>
+            <p>Boating</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-campground ms-3 mt-3"></i><br>
-            Camping
+            <i class="fa-solid fa-campground"></i>
+            <p>Camping</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-cow ms-3 mt-3"></i><br>
-            Farms
+            <i class="fa-solid fa-cow"></i>
+            <p>Farms</p>
         </div>
-        <div class="tax-container">
-            <div class="form-check-reverse form-switch mt-3 ">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" class="tax-switch">
+    </div>
+
+    <div class="tax-container">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input tax-switch" type="checkbox" id="flexSwitchCheckDefault">
             <label class="form-check-label" for="flexSwitchCheckDefault">Show Price With Taxes</label>
-            </div>
         </div>
-    </div>    
+    </div>
+</div>   
 <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-2">
   <% for (let listing of alllistings) { %>
     <a href="/listings/<%= listing._id %>" class="listing-link">
@@ -74,13 +74,11 @@
   <% } %>
 </div>
 
-
-
 <script>
     let checkbox = document.getElementById("flexSwitchCheckDefault");
     checkbox.addEventListener("click",()=>{
         let taxinfo = document.getElementsByClassName("tax-info");
-        for(info of taxinfo){
+        for(let info of taxinfo){
             if(info.style.display != "inline"){
                 info.style.display = "inline";
             }else{
