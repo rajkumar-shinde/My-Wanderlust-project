@@ -4,25 +4,38 @@
   <div class="col-6 offset-3">
     <form action="/signup" method="post" class="needs-validation" novalidate>
       <div class="mb-3">
-        <label for="username" class="form-label">username</label>
+        <label for="username" class="form-label">Username</label>
         <input
           type="text"
           id="username"
           name="username"
           required
+          minlength="3"
+          maxlength="20"
+          pattern="[a-zA-Z0-9_]{3,20}"
+          title="Username must be 3-20 characters. Only letters, numbers, and underscores (_) are allowed."
           class="form-control"
         />
-        <div class="valid-feedback">username looks good!</div>
+        <div class="invalid-feedback">
+          Username must be 3-20 characters long. Only letters, numbers, and
+          underscores (_) are allowed.
+        </div>
+        <div class="valid-feedback">Username looks good!</div>
       </div>
       <div class="mb-3">
-        <label for="email" class="form-label">email</label>
+        <label for="email" class="form-label">Email</label>
         <input
-          type="text"
+          type="email"
           id="email"
           name="email"
           required
+          pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+          title="Please enter a valid Gmail address ending with @gmail.com"
           class="form-control"
         />
+        <div class="invalid-feedback">
+          Please enter a valid email ending with @gmail.com.
+        </div>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">password</label>

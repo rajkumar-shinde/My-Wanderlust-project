@@ -12,7 +12,15 @@ const userSchema = new Schema({
     unique: true,
   },
 });
-
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose, {
+  usernameValidator: (username) => {
+    return /^[a-zA-Z0-9_]{3,20}$/.test(username);
+  },
+  errorMessages: {
+    MissingUsernameError: "Username is required.",
+    IncorrectUsernameError:
+      "Username must be 3-20 characters and contain only letters, numbers, and underscores.",
+  },
+});
 
 module.exports = mongoose.model("User", userSchema);
