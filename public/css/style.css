@@ -1,3 +1,7 @@
+/* ==============================
+   GENERAL
+================================ */
+
 body {
   font-family: "Plus Jakarta Sans", sans-serif !important;
   min-height: 100vh;
@@ -5,72 +9,94 @@ body {
   flex-direction: column;
   overflow-x: hidden;
 }
+
 .container {
   flex: 1;
 }
+
 .nav-link {
   color: #222222 !important;
 }
+
 .navbar {
   height: 5rem;
   font-size: large;
   background-color: white;
 }
+
 .iconofapp {
   color: red;
   font-size: 2rem;
 }
-/* footer */
+
+/* ==============================
+   FOOTER
+================================ */
+
 .footer-links a {
   text-decoration: none;
   color: #222222;
 }
+
 .footer-links a:hover {
   text-decoration: underline;
   color: #222222;
 }
+
 .f-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
+
 .footer-social i {
   font-size: 20px;
 }
+
 .footer {
   margin-top: auto;
   background-color: #ebebeb;
   padding: 18px 0;
 }
+
 .footer-links,
 .footer-social {
   display: flex;
   gap: 15px;
 }
+
 .footer-text {
   text-align: center;
 }
 
-/* cards */
+/* ==============================
+   LISTING CARDS
+================================ */
 
 .card-listing {
   border: none !important;
   margin-bottom: 2rem;
 }
+
 .card-img-top {
+  display: block;
   border-radius: 1rem !important;
   width: 100% !important;
 }
+
 .card-body {
   padding: 0 !important;
 }
+
 .card-text p {
   font-weight: 400 !important;
 }
+
 .listing-link {
   text-decoration: none;
 }
+
 .card-img-overlay {
   opacity: 0;
 }
@@ -80,53 +106,60 @@ body {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* new page for creating new listing */
-/* also done for update listing */
+/* ==============================
+   CREATE / UPDATE LISTING
+================================ */
+
 .addbtn {
   background-color: red !important;
   border: none !important;
 }
-/* used bts classes and formating  */
 
-/* show page */
+/* ==============================
+   SHOW LISTING
+================================ */
+
 .show-img {
   width: 100%;
   height: 25rem;
   object-fit: cover;
   border-radius: 1rem;
 }
+
 .btns {
   display: flex;
 }
+
 .showbtn {
   display: flex;
   gap: 50px;
   margin-top: 15px;
   margin-bottom: 20px;
 }
-@media (max-width: 768px) {
-  .show-img {
-    height: 20rem;
-  }
-}
+
 .show-card {
   padding-left: 0;
   padding-right: 0;
 }
 
-/*  */
 .success-msg {
   text-align: center;
   font-size: large;
 }
 
-/* MAP */
+/* ==============================
+   MAP
+================================ */
+
 #map {
   height: 400px;
   width: 80vh;
+  max-width: 100%;
 }
 
-/*Filters*/
+/* ==============================
+   FILTERS
+================================ */
 
 .filter {
   font-size: 1rem;
@@ -147,23 +180,12 @@ body {
 }
 
 .tax-container {
-  /* margin-top: 2rem;
-    padding-top:0.7rem;
-    padding-right: 1rem;
-    border-radius: 1rem;
-    border:1px solid black;
-    height:3rem;
-    margin-left: 3rem;
-    display:inline-block;
-    padding-left: 1rem;;
-     */
   border: 1px solid black;
   border-radius: 1rem;
   display: flex;
   align-items: center;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.7rem 1rem;
+  min-height: 3rem;
 }
 
 .form-check-input {
@@ -176,23 +198,27 @@ body {
   display: none;
 }
 
-@media (max-width: 576px) {
-  .filters .filter:nth-child(n + 5) {
-    display: none; /* hide filters after the 4th one */
-  }
+/* ==============================
+   SEARCH BAR - DESKTOP
+================================ */
+
+.search-bar form {
+  display: flex;
+  align-items: center;
 }
 
 .search-bar form button {
   background-color: #fe424d !important;
   border-radius: 25px;
   color: white !important;
-  padding: 0 1rem 0 1rem;
+  padding: 0.5rem 1rem;
   opacity: 0.9;
+  white-space: nowrap;
 }
 
 .search-bar form input {
   border-radius: 25px;
-  padding: 0.4rem 3rem 0.4rem 3rem;
+  padding: 0.4rem 3rem;
   font-size: 1rem;
 }
 
@@ -200,21 +226,10 @@ body {
   opacity: 1;
 }
 
-/* button login and  sign up */
-/* .btn-brand {
-  background-color: #fe424d;
-  border-color: #fe424d;
-  color: #fff;
-}
+/* ==============================
+   SIGN UP
+================================ */
 
-.btn-brand:hover,
-.btn-brand:focus {
-  background-color: #e0353f;
-  border-color: #e0353f;
-  color: #fff;
-} */
-
-/* Sign Up */
 .wl-signup {
   color: #ff385c !important;
   border: 1px solid #ff385c;
@@ -228,7 +243,10 @@ body {
   color: white !important;
 }
 
-/* Log In */
+/* ==============================
+   LOG IN
+================================ */
+
 .wl-login {
   color: #333 !important;
   border: 1px solid #ddd;
@@ -242,7 +260,10 @@ body {
   color: white !important;
 }
 
-/* LogOut */
+/* ==============================
+   LOG OUT
+================================ */
+
 .wl-logout {
   color: #dc3545 !important;
   border: 1px solid #dc3545;
@@ -254,4 +275,177 @@ body {
 .wl-logout:hover {
   background-color: #dc3545;
   color: white !important;
+}
+
+/* ==============================
+   TABLET & MOBILE
+================================ */
+
+@media (max-width: 767.98px) {
+  /* Navbar */
+  .navbar {
+    height: auto;
+    min-height: 5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .navbar-collapse {
+    background-color: white;
+    padding: 1rem 0.25rem;
+    position: relative;
+    z-index: 1050;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .navbar-collapse .navbar-nav {
+    width: 100%;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .navbar-collapse .nav-link {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .wl-signup,
+  .wl-login,
+  .wl-logout {
+    display: inline-block;
+    width: fit-content;
+  }
+
+  /* Search */
+  .search-bar {
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .search-bar form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .search-bar form input {
+    flex: 1;
+    width: 0;
+    min-width: 0;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .search-bar form button {
+    flex-shrink: 0;
+    padding: 0.6rem 0.75rem;
+  }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+
+  .filter {
+    margin: 0;
+    flex: 0 0 calc(25% - 0.8rem);
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  /* Tax toggle */
+  .tax-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .form-check-input {
+    flex-shrink: 0;
+    margin-right: 0.4rem;
+  }
+
+  /* Listing cards */
+  .card-listing {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-img-top {
+    height: 18rem;
+    object-fit: cover;
+  }
+
+  /* Show listing */
+  .show-img {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+  }
+
+  .showbtn {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* Map */
+  #map {
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+  }
+
+  /* Prevent horizontal scrolling */
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  /* Footer */
+  .footer-links,
+  .footer-social {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ==============================
+   SMALL PHONES
+================================ */
+
+@media (max-width: 400px) {
+  .filters .filter:nth-child(n + 5) {
+    display: none;
+  }
+
+  .filter {
+    flex-basis: calc(25% - 0.8rem);
+    font-size: 0.7rem;
+  }
+
+  .card-img-top {
+    height: 15rem;
+  }
+
+  .show-img {
+    height: 18rem;
+  }
+
+  .search-bar form input {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
 }
