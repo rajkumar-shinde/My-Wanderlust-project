@@ -1,64 +1,36 @@
-
 <nav class="navbar navbar-expand-md bg-body-white border-bottom sticky-top">
   <div class="container-fluid">
-
-    <a class="navbar-brand" href="/listings">
-      <i class="fa-regular fa-compass iconofapp"></i>
-    </a>
-
+    <a class="navbar-brand" href="/listings"
+      ><i class="fa-regular fa-compass iconofapp"></i
+    ></a>
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
-
       <div class="search-bar ms-auto">
-        <form class="d-flex" action="/listings" method="GET">
-          <input
-            class="form-control me-2"
-            type="search"
-            name="search"
-            placeholder="Search Destinations"
-            aria-label="Search">
-
-          <button class="btn btn-outline-success" type="submit">
-            <i class="fa fa-search me-2"></i>Search
-          </button>
-        </form>
+        <form class="d-flex ">
+        <input class="form-control me-2" type="search" placeholder="Search Destinations" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit"><i style="display:inline; margin-right:0.5rem;" class="fa fa-search" ></i>Search</button>
+      </form>
       </div>
-
       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">
-          Airbnb your home
-        </a>
-
-        <% if (!currentUser) { %>
-          <a class="nav-link wl-signup" href="/signup">
-            <b>Sign Up</b>
-          </a>
-          <a class="nav-link wl-login" href="/login">
-            <b>Log In</b>
-          </a>
-        <% } %>
-
-        <% if (currentUser) { %>
-          <a class="nav-link wl-logout" href="/logout">
-            LogOut
-          </a>
-        <% } %>
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <%if(!currentUser){%>
+        <a class="nav-link wl-signup" href="/signup"><b>Sign Up</b></a>
+        <a class="nav-link wl-login" href="/login"><b>Log In</b></a>
+        <%  }%>
+        <%if(currentUser){%>
+        <a class="nav-link wl-logout" href="/logout">LogOut</a>
+        <%  }%>
       </div>
-
     </div>
   </div>
 </nav>
