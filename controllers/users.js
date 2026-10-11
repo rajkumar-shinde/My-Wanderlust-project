@@ -1,28 +1,40 @@
 const User = require("../models/user");
 
+// Flash set karne ke baad session save karke hi redirect karo
+const flashAndRedirect = (req, res, type, message, url) => {
+  req.flash(type, message);
+  req.session.save(() => res.redirect(url));
+};
+
 module.exports.renderSignupForm = (req, res) => {
-  res.render("./users/signup.ejs");
+  res.render("./users/signup.ejs", { title: "Sign Up" });
 };
 
 module.exports.signup = async (req, res, next) => {
   try {
     let { username, email, password } = req.body;
     email = (email || "").trim();
+
+    // Validate email
     if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email)) {
-      req.flash(
+      return flashAndRedirect(
+        req,
+        res,
         "error",
         "Please enter a valid Gmail address ending with @gmail.com.",
+        "/signup",
       );
-      return res.redirect("/signup");
     }
 
     // Validate username
     if (!/^[a-zA-Z0-9_]{3,20}$/.test(username || "")) {
-      req.flash(
+      return flashAndRedirect(
+        req,
+        res,
         "error",
-        "Username must be 3–20 characters long and contain at least one letter. Only letters, numbers, and underscores (_) are allowed. Spaces and special characters are not allowed.",
+        "Username must be 3-20 characters long. Only letters, numbers, and underscores (_) are allowed.",
+        "/signup",
       );
-      return res.redirect("/signup");
     }
 
     const newUser = new User({ email, username });
@@ -32,23 +44,31 @@ module.exports.signup = async (req, res, next) => {
       if (err) {
         return next(err);
       }
-
-      req.flash("success", "Welcome to WanderLust!");
-      res.redirect("/listings");
+      flashAndRedirect(
+        req,
+        res,
+        "success",
+        "Welcome to WanderLust!",
+        "/listings",
+      );
     });
   } catch (e) {
-    req.flash("error", e.message);
-    res.redirect("/signup");
+    flashAndRedirect(req, res, "error", e.message, "/signup");
   }
 };
 
 module.exports.renderLoginForm = (req, res) => {
-  res.render("./users/login.ejs");
+  res.render("./users/login.ejs", { title: "Log In" });
 };
 
-module.exports.login = async (req, res) => {
-  req.flash("success", "welcome back to wanderlust!");
-  res.redirect(res.locals.redirectUrl || "/listings");
+module.exports.login = (req, res) => {
+  flashAndRedirect(
+    req,
+    res,
+    "success",
+    "Welcome back to WanderLust!",
+    res.locals.redirectUrl || "/listings",
+  );
 };
 
 module.exports.logout = (req, res, next) => {
@@ -56,7 +76,12 @@ module.exports.logout = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    req.flash("success", "You logged out successfully!");
-    res.redirect("/listings");
+    flashAndRedirect(
+      req,
+      res,
+      "success",
+      "You logged out successfully!",
+      "/listings",
+    );
   });
 };

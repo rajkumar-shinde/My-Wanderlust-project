@@ -1,41 +1,42 @@
 <% layout("layouts/boilerplate") %>
-<!-- <h3>All Listings</h3> -->
-     <div class="filters-wrapper container-md">
+
+<!-- Filters + Tax toggle -->
+<div class="filters-wrapper container-md">
     <div class="filters-scroll">
         <div class="filter">
-            <i class="fa-solid fa-fire"></i>
+            <img src="/icons/trending.svg" alt="Trending">
             <p>Trending</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-bed"></i>
+            <img src="/icons/rooms.svg" alt="Rooms">
             <p>Rooms</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-mountain-city"></i>
+            <img src="/icons/iconic-cities.svg" alt="Iconic Cities">
             <p>Iconic Cities</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-mountain"></i>
+            <img src="/icons/mountains.svg" alt="Mountains">
             <p>Mountains</p>
         </div>
         <div class="filter">
-            <i class="fa fa-university"></i>
+            <img src="/icons/palaces.svg" alt="Palaces">
             <p>Palaces</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-person-swimming"></i>
+            <img src="/icons/pools.svg" alt="Pools">
             <p>Pools</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-ship"></i>
+            <img src="/icons/boating.svg" alt="Boating">
             <p>Boating</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-campground"></i>
+            <img src="/icons/camping.svg" alt="Camping">
             <p>Camping</p>
         </div>
         <div class="filter">
-            <i class="fa-solid fa-cow"></i>
+            <img src="/icons/farms.svg" alt="Farms">
             <p>Farms</p>
         </div>
     </div>
@@ -46,44 +47,67 @@
             <label class="form-check-label" for="flexSwitchCheckDefault">Show Price With Taxes</label>
         </div>
     </div>
-</div>   
-<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-2">
-  <% for (let listing of alllistings) { %>
-    <a href="/listings/<%= listing._id %>" class="listing-link">
-    <div class="col">
-      <div class="card card-listing">
-        <img
-          src="<%= listing.image.url %>"
-          class="card-img-top"
-          alt="..."
-          style="height: 20rem;"
-        >
-        <div class="card-img-overlay">
-        <i class="fa-solid fa-heart"></i>
-        </div>
-        <div class="card-body">
-          <p class="card-text">
-            <b><%= listing.title %></b><br>
-           <b>&#x20B9;<%= listing.price.toLocaleString("en-IN") %> </b>/night 
-           &nbsp;&nbsp;<i class="tax-info">+ 18% GST</i>
-          </p>
-        </div>
-      </div>
-    </div>
-    </a>
-  <% } %>
+</div>
+
+<!-- Listing cards -->
+<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-2 gx-4">
+    <% for (let listing of alllistings) { %>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="col">
+                <div class="card card-listing">
+                    <div class="card-img-wrap">
+                        <img
+                            src="<%= listing.image.url %>"
+                            class="card-img-top"
+                            alt="<%= listing.title %>"
+                            loading="lazy"
+                        >
+                        <button type="button" class="heart-btn" aria-label="Save to wishlist">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <span class="listing-title"><%= listing.title %></span><br>
+                            <span class="listing-price">&#x20B9;<%= listing.price.toLocaleString("en-IN") %></span>
+                            <span class="listing-night">/ night</span>
+                            <i class="tax-info">+ 18% GST</i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    <% } %>
 </div>
 
 <script>
+    // Tax switch: GST text show/hide
     let checkbox = document.getElementById("flexSwitchCheckDefault");
-    checkbox.addEventListener("click",()=>{
+    checkbox.addEventListener("click", () => {
         let taxinfo = document.getElementsByClassName("tax-info");
-        for(let info of taxinfo){
-            if(info.style.display != "inline"){
-                info.style.display = "inline";
-            }else{
-                info.style.display = "none";
-            }
+        for (let info of taxinfo) {
+            info.style.display = info.style.display !== "inline" ? "inline" : "none";
         }
-    })
+    });
+
+    // Heart button: toggle red heart
+    document.querySelectorAll(".heart-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();   // card ka link open hone se rokta hai
+            e.stopPropagation();
+            btn.classList.toggle("active");
+            const icon = btn.querySelector("i");
+            icon.classList.toggle("fa-regular");
+            icon.classList.toggle("fa-solid");
+        });
+    });
+
+    // Active filter highlight
+    const filters = document.querySelectorAll(".filter");
+    filters.forEach((filter) => {
+        filter.addEventListener("click", () => {
+            filters.forEach((f) => f.classList.remove("active"));
+            filter.classList.add("active");
+        });
+    });
 </script>

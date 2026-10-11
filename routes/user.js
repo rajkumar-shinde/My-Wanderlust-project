@@ -16,10 +16,23 @@ router
   .get(userController.renderLoginForm)
   .post(
     saveRedirectUrl,
-    passport.authenticate("local", {
-      failureRedirect: "/login",
-      failureFlash: true,
-    }),
+    (req, res, next) => {
+      passport.authenticate("local", (err, user) => {
+        if (err) return next(err);
+
+        // Galat username ya password
+        if (!user) {
+          req.flash("error", "Invalid username or password");
+          return req.session.save(() => res.redirect("/login"));
+        }
+
+        // Sahi login: controller.login aage ka kaam karega
+        req.logIn(user, (err) => {
+          if (err) return next(err);
+          next();
+        });
+      })(req, res, next);
+    },
     userController.login,
   );
 

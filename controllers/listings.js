@@ -5,11 +5,11 @@ const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
   const alllistings = await Listing.find({});
-  res.render("./listings/index.ejs", { alllistings });
+  res.render("./listings/index.ejs", { alllistings, title: "Explore" });
 };
 
 module.exports.renderNewForm = (req, res) => {
-  res.render("./listings/newlisting.ejs");
+  res.render("./listings/newlisting.ejs", { title: "Host your home" });
 };
 
 module.exports.showListing = async (req, res) => {
@@ -17,12 +17,11 @@ module.exports.showListing = async (req, res) => {
   const listing = await Listing.findById(id)
     .populate({ path: "reviews", populate: { path: "author" } })
     .populate("owner");
-  // console.log(listing);
   if (!listing) {
     req.flash("error", "listing does not exists");
     return res.redirect("/listings");
   }
-  res.render("./listings/show.ejs", { listing });
+  res.render("./listings/show.ejs", { listing, title: listing.title });
 };
 
 module.exports.createListing = async (req, res) => {
@@ -56,20 +55,23 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error", "listing does not exists");
     return res.redirect("/listings");
   }
-  let originalImage = listing.image.url;
-  originalImage.replace("/upload", "/upload/w_250");
-  res.render("./listings/editlisting.ejs", { listing, originalImage });
+  // FIXED: replace() naya string return karta hai, isliye variable me save karna zaroori hai
+  let originalImage = listing.image.url.replace("/upload", "/upload/w_250");
+  res.render("./listings/editlisting.ejs", {
+    listing,
+    originalImage,
+    title: "Edit " + listing.title,
+  });
 };
 
 module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findByIdAndUpdate(id, req.body.listing);
-  console.log(listing);
   if (typeof req.file !== "undefined") {
     let url = req.file.path;
     let filename = req.file.filename;
     listing.image = { url, filename };
-    listing.save();
+    await listing.save(); // FIXED: await add kiya
   }
   req.flash("success", "listing updated");
   res.redirect(`/listings/${id}`);

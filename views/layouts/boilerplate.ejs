@@ -3,7 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WanderLust</title>
+    <meta name="theme-color" content="#fe424d" />
+    <meta
+      name="description"
+      content="WanderLust - discover and book unique stays, from beachfront villas to mountain cabins."
+    />
+
+    <!-- Dynamic page title -->
+    <title>
+      <%= typeof title !== "undefined" && title ? title + " | WanderLust" :
+      "WanderLust" %>
+    </title>
+
     <link rel="stylesheet" href="/css/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -18,7 +29,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <link rel="apple-touch-icon" href="/favicon.png?v=2" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

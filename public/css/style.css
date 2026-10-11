@@ -1,3 +1,32 @@
+/* =====================================================
+   WANDERLUST - MAIN STYLESHEET
+   Sections:
+   1. Theme variables
+   2. Base / Global
+   3. Navbar & Search
+   4. Auth buttons (Sign Up / Log In / Log Out)
+   5. Filters & Tax toggle
+   6. Listing cards & Heart button
+   7. Forms (new / edit listing)
+   8. Show page
+   9. Map
+   10. Footer
+   11. Responsive: Tablet & Mobile
+   ===================================================== */
+
+/* =====================================================
+   1. THEME VARIABLES
+   Colour badalna ho to sirf yahan badlo
+   ===================================================== */
+:root {
+  --brand: #fe424d;
+  --brand-dark: #e03540;
+  --text-dark: #222222;
+}
+
+/* =====================================================
+   2. BASE / GLOBAL
+   ===================================================== */
 body {
   font-family: "Plus Jakarta Sans", sans-serif !important;
   min-height: 100vh;
@@ -10,157 +39,154 @@ body {
   flex: 1;
 }
 
-.nav-link {
-  color: #222222 !important;
+.success-msg {
+  text-align: center;
+  font-size: large;
 }
 
+/* =====================================================
+   3. NAVBAR & SEARCH
+   ===================================================== */
+/* Navbar */
 .navbar {
   height: 5rem;
   font-size: large;
   background-color: white;
+  z-index: 1030;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06); /* NEW: halki shadow */
 }
 
-.iconofapp {
-  color: red;
-  font-size: 2rem;
+/* Nav links */
+.nav-link {
+  color: var(--text-dark) !important;
+  transition: color 0.2s ease; /* NEW */
 }
+
+.nav-link:hover {
+  color: var(--brand) !important; /* NEW: hover pe red */
+}
+
+/* NEW: "Host your home" link */
+.nav-host {
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-host:hover {
+  background-color: #f5f5f5;
+}
+
+/* Logo */
 .iconofapp {
   width: 35px;
   height: 35px;
   object-fit: contain;
   vertical-align: middle;
 }
-/* footer */
-.footer-links a {
-  text-decoration: none;
-  color: #222222;
+
+/* Search input */
+.search-bar form input {
+  border-radius: 25px;
+  padding: 0.4rem 3rem;
+  font-size: 1rem;
 }
 
-.footer-links a:hover {
-  text-decoration: underline;
-  color: #222222;
+/* NEW: input focus pe red glow */
+.search-bar form input:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.2);
 }
 
-.f-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+/* Search button (CHANGED: opacity hata ke hover colour diya) */
+.search-bar form button {
+  background-color: var(--brand) !important;
+  border: 1px solid var(--brand) !important; /* NEW */
+  border-radius: 25px;
+  color: white !important;
+  padding: 0 1rem;
+  transition: background-color 0.2s ease; /* NEW */
 }
 
-.footer-social i {
-  font-size: 20px;
+.search-bar form button:hover {
+  background-color: var(--brand-dark) !important; /* CHANGED */
+  border-color: var(--brand-dark) !important; /* NEW */
 }
 
-.footer {
-  margin-top: auto;
-  background-color: #ebebeb;
-  padding: 18px 0;
+/* =====================================================
+   FLASH MESSAGES
+   ===================================================== */
+.wl-flash {
+  position: fixed;
+  top: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1060;
+  width: min(90%, 480px);
+  margin: 0;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  font-size: 0.95rem;
 }
 
-.footer-links,
-.footer-social {
-  display: flex;
-  gap: 15px;
+/* =====================================================
+   4. AUTH BUTTONS
+   ===================================================== */
+
+/* Sign Up */
+.wl-signup {
+  color: var(--brand) !important;
+  border: 1px solid var(--brand);
+  border-radius: 8px;
+  padding: 8px 16px !important;
+  transition: 0.3s ease;
 }
 
-.footer-text {
-  text-align: center;
+.wl-signup:hover {
+  background-color: var(--brand);
+  color: white !important;
 }
 
-/* cards */
-.card-listing {
-  border: none !important;
-  margin-bottom: 2rem;
+/* Log In */
+.wl-login {
+  color: #333 !important;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 16px !important;
+  transition: 0.3s ease;
 }
 
-.card-img-top {
-  border-radius: 1rem !important;
-  width: 100% !important;
+.wl-login:hover {
+  background-color: #333;
+  color: white !important;
 }
 
-.card-body {
-  padding: 0 !important;
+/* Log Out (alag red: danger action) */
+.wl-logout {
+  color: #dc3545 !important;
+  border: 1px solid #dc3545;
+  border-radius: 8px;
+  padding: 8px 16px !important;
+  transition: 0.3s ease;
 }
 
-.card-text p {
-  font-weight: 400 !important;
+.wl-logout:hover {
+  background-color: #dc3545;
+  color: white !important;
 }
 
-.listing-link {
-  text-decoration: none;
-}
-
-.card-img-overlay {
-  opacity: 0;
-}
-
-.card:hover .card-img-overlay {
-  opacity: 1;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* new page for creating new listing */
-/* also done for update listing */
-.addbtn {
-  background-color: red !important;
-  border: none !important;
-}
-
-/* used bts classes and formating */
-
-/* show page */
-.show-img {
-  width: 100%;
-  height: 25rem;
-  object-fit: cover;
-  border-radius: 1rem;
-}
-
-.btns {
-  display: flex;
-}
-
-.showbtn {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 15px;
-  margin-bottom: 20px;
-}
-
-@media (max-width: 768px) {
-  .show-img {
-    height: 20rem;
-  }
-}
-
-.show-card {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.success-msg {
-  text-align: center;
-  font-size: large;
-}
-
-/* MAP */
-#map {
-  height: 400px;
-  width: 80vh;
-}
-
-/* Filters */
-
-/* Filters */
-
+/* =====================================================
+   5. FILTERS & TAX TOGGLE
+   Mobile: filters swipe hote hain, tax box neeche
+   Desktop (992px+): sab ek line me, tax box right me
+   ===================================================== */
 .filters-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
@@ -186,14 +212,32 @@ body {
   font-size: 1.1rem;
   opacity: 0.5;
   cursor: pointer;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid transparent;
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .filter:hover {
   opacity: 1;
 }
 
+/* Click kiya hua filter */
+.filter.active {
+  opacity: 1;
+  border-bottom-color: var(--brand);
+}
+
 .filter i {
   font-size: 1.3rem;
+}
+
+.filter img {
+  width: 1.6rem;
+  height: 1.6rem;
+  display: block;
+  margin: 0 auto;
 }
 
 .filter p {
@@ -201,6 +245,7 @@ body {
   font-size: 1.05rem;
 }
 
+/* Tax toggle box */
 .tax-container {
   border: 1px solid black;
   border-radius: 1rem;
@@ -211,7 +256,11 @@ body {
   font-size: 1.1rem;
 }
 
-/* Desktop: sab ek line me, switch right side */
+.tax-container .form-check-input {
+  margin-right: 1rem;
+}
+
+/* Desktop layout */
 @media (min-width: 992px) {
   .filters-wrapper {
     flex-direction: row;
@@ -228,80 +277,346 @@ body {
   }
 }
 
-.form-check-input {
-  padding-right: 1rem;
-  margin-right: 1rem;
-  font-size: 1rem;
+/* =====================================================
+   6. LISTING CARDS & HEART BUTTON
+   ===================================================== */
+.card-listing {
+  border: none !important;
+  margin-bottom: 2rem;
 }
 
+/* Image wrapper: zoom card ke andar hi rehta hai */
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  height: 20rem; /* NEW: desktop height (index.ejs se inline style hata dena) */
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card-listing:hover .card-img-top {
+  transform: scale(1.03);
+}
+
+.card-body {
+  padding: 0 !important;
+}
+
+/* CHANGED: line-height add hua */
+.card-text {
+  margin-top: 0.6rem;
+  line-height: 1.5;
+}
+
+/* REMOVED: .card-text p { font-weight: 400 !important; } 
+   (.card-text khud <p> hai, ye rule kaam ka nahi tha) */
+
+/* NEW: Title, bold aur ek line me, lamba ho to ... se kat jaye */
+.listing-title {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* NEW: Price, thoda bold */
+.listing-price {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* NEW: "/ night", halka aur chhota */
+.listing-night {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #6b6b6b;
+}
+
+/* NEW: "+ 18% GST", switch ON hone par dikhta hai */
 .tax-info {
   display: none;
+  margin-left: 0.4rem;
+  font-size: 0.85rem;
+  color: #6b6b6b;
 }
 
-.search-bar form button {
-  background-color: #fe424d !important;
-  border-radius: 25px;
-  color: white !important;
-  padding: 0 1rem 0 1rem;
-  opacity: 0.9;
+.listing-link {
+  text-decoration: none;
+}
+/* Heart button (image ke top-right me) */
+.heart-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s ease;
 }
 
-.search-bar form input {
-  border-radius: 25px;
-  padding: 0.4rem 3rem 0.4rem 3rem;
+.heart-btn:hover {
+  transform: scale(1.1);
+}
+
+.heart-btn.active {
+  color: var(--brand);
+}
+
+/* =====================================================
+   7. FORMS (new listing / edit listing)
+   ===================================================== */
+.addbtn {
+  background-color: var(--brand) !important;
+  border: none !important;
+}
+
+.addbtn:hover {
+  background-color: var(--brand-dark) !important;
+}
+
+/* =====================================================
+   8. SHOW PAGE
+   ===================================================== */
+.show-img {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.show-card {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.btns {
+  display: flex;
+}
+
+.showbtn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+/* =====================================================
+   8. SHOW PAGE
+   ===================================================== */
+.show-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 0.75rem;
+}
+
+.show-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.show-location {
+  color: #6b6b6b;
+  margin-bottom: 1rem;
+}
+
+.show-location i {
+  color: var(--brand);
+  margin-right: 0.3rem;
+}
+
+.show-img {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  display: block;
+}
+
+.show-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.show-host {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.host-avatar {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background-color: var(--brand);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.host-label {
+  font-size: 0.8rem;
+  color: #6b6b6b;
+}
+
+.host-name {
+  font-weight: 600;
+}
+
+.show-price .listing-price {
+  font-size: 1.5rem;
+}
+
+.show-description {
+  line-height: 1.7;
+  color: #333;
+}
+
+.showbtn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.section-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.review-card {
+  border: 1px solid #ebebeb;
+  border-radius: 1rem;
+}
+/* Listing cards ka padding: 0 rule yahan override karo */
+.review-card .card-body {
+  padding: 1.25rem !important;
+}
+
+.review-card .card-title {
   font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
 }
 
-.search-bar form button:hover {
+.review-card .starability-result {
+  margin-bottom: 0.75rem;
+}
+
+.review-card .card-text {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+/* =====================================================
+   9. MAP
+   ===================================================== */
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+/* =====================================================
+   10. FOOTER
+   ===================================================== */
+.footer {
+  margin-top: auto;
+  background-color: #f7f7f7;
+  border-top: 1px solid #ebebeb;
+  padding: 24px 0;
+}
+
+.f-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-links,
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Links */
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+/* Social icons */
+.footer-social img {
+  width: 28px;
+  height: 28px;
+  display: block;
+  opacity: 0.75;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.footer-social a:hover img {
+  transform: translateY(-3px) scale(1.1);
   opacity: 1;
 }
 
-/* Sign Up */
-.wl-signup {
-  color: #ff385c !important;
-  border: 1px solid #ff385c;
-  border-radius: 8px;
-  padding: 8px 16px !important;
-  transition: 0.3s ease;
+/* Copyright */
+.footer-text {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  padding-top: 14px;
+  border-top: 1px solid #e3e3e3;
+  width: 100%;
+  max-width: 500px;
+}
+/* =====================================================
+   11. RESPONSIVE
+   ===================================================== */
+
+/* Tablet & below */
+@media (max-width: 768px) {
+  .show-img {
+    height: 20rem;
+  }
 }
 
-.wl-signup:hover {
-  background-color: #ff385c;
-  color: white !important;
-}
-
-/* Log In */
-.wl-login {
-  color: #333 !important;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 8px 16px !important;
-  transition: 0.3s ease;
-}
-
-.wl-login:hover {
-  background-color: #333;
-  color: white !important;
-}
-
-/* LogOut */
-.wl-logout {
-  color: #dc3545 !important;
-  border: 1px solid #dc3545;
-  border-radius: 8px;
-  padding: 8px 16px !important;
-  transition: 0.3s ease;
-}
-
-.wl-logout:hover {
-  background-color: #dc3545;
-  color: white !important;
-}
-
-/* ==============================
-   MOBILE LAYOUT FIXES (added at end)
-================================ */
-
+/* Mobile */
 @media (max-width: 767.98px) {
   /* Navbar */
   .navbar {
@@ -362,8 +677,6 @@ body {
     white-space: nowrap;
   }
 
-  /* Filters */
-
   /* Tax toggle */
   .tax-container {
     font-size: 0.9rem;
@@ -374,7 +687,7 @@ body {
     margin: 0;
   }
 
-  .form-check-input {
+  .tax-container .form-check-input {
     flex-shrink: 0;
     margin-right: 0.4rem;
   }
@@ -397,7 +710,7 @@ body {
     height: 300px;
   }
 
-  /* Prevent horizontal scroll */
+  /* Horizontal scroll rokne ke liye */
   .container {
     max-width: 100%;
   }
@@ -410,6 +723,7 @@ body {
   }
 }
 
+/* Small phones */
 @media (max-width: 400px) {
   .card-img-top {
     height: 15rem;
@@ -423,4 +737,169 @@ body {
     padding-left: 0.7rem;
     padding-right: 0.7rem;
   }
+}
+
+/* =====================================================
+   AUTH PAGES (login / signup)
+   ===================================================== */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0.75rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: white;
+  border: 1px solid #ebebeb;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.auth-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.auth-subtitle {
+  color: #6b6b6b;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-card .form-control {
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+}
+
+.auth-card .form-control:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.2);
+}
+
+.auth-card .addbtn {
+  padding: 0.65rem;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.auth-switch {
+  text-align: center;
+  margin: 1.25rem 0 0;
+  color: #6b6b6b;
+}
+
+.auth-switch a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   ERROR PAGE
+   ===================================================== */
+.error-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0.75rem;
+}
+
+.error-card {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border: 1px solid #ebebeb;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.error-icon {
+  font-size: 2.5rem;
+  color: var(--brand);
+  margin-bottom: 0.5rem;
+}
+
+.error-code {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--brand);
+  margin: 0;
+  line-height: 1;
+}
+
+.error-title {
+  font-weight: 700;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.error-message {
+  color: #6b6b6b;
+  margin-bottom: 1.5rem;
+}
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* =====================================================
+   LISTING FORM (new / edit)
+   ===================================================== */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0.75rem;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 640px;
+  background-color: white;
+  border: 1px solid #ebebeb;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.form-card .form-control {
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+}
+
+.form-card .form-control:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.2);
+}
+
+.form-card .addbtn {
+  padding: 0.65rem;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.image-preview {
+  display: none;
+  width: 100%;
+  max-height: 14rem;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 0.75rem;
+}
+
+/* edit image preview */
+.current-image {
+  width: 100%;
+  max-height: 14rem;
+  object-fit: cover;
+  border-radius: 10px;
 }

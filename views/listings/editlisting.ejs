@@ -1,8 +1,10 @@
 <% layout("layouts/boilerplate") %>
 
-<div class="row mt-3">
-  <div class="col-8 offset-2">
-    <h1>Edit Listing</h1>
+<div class="form-wrapper">
+  <div class="form-card">
+    <h2 class="auth-title">Edit your listing</h2>
+    <p class="auth-subtitle">Update the details of your place</p>
+
     <form
       method="POST"
       action="/listings/<%= listing._id %>?_method=PUT"
@@ -21,7 +23,6 @@
           class="form-control"
           required
         />
-        <div class="valid-feedback">Title looks good!</div>
         <div class="invalid-feedback">Please enter a title.</div>
       </div>
 
@@ -31,51 +32,58 @@
         <textarea
           id="description"
           name="listing[description]"
+          rows="4"
           class="form-control"
           required
         >
 <%= listing.description %></textarea
         >
-        <div class="valid-feedback">Description looks good!</div>
         <div class="invalid-feedback">Please enter a description.</div>
       </div>
 
+      <!-- Current image -->
       <div class="mb-3">
-        <p>Original listing image</p>
-        <img src="<%= originalImage %>" />
+        <label class="form-label">Current image</label>
+        <div>
+          <img
+            src="<%= originalImage %>"
+            class="current-image"
+            alt="<%= listing.title %>"
+          />
+        </div>
       </div>
 
-      <!-- Image URL -->
+      <!-- New image (optional) -->
       <div class="mb-3">
-        <label for="image" class="form-label">Upload New Image</label>
+        <label for="image" class="form-label">
+          Upload new image <span class="text-muted">(optional)</span>
+        </label>
         <input
           type="file"
           id="image"
           name="listing[image][url]"
-          placeholder="Upload New Image"
+          accept="image/*"
           class="form-control"
-          required
         />
+        <img id="imagePreview" class="image-preview" alt="New image preview" />
       </div>
 
-      <!-- Price and Country -->
+      <!-- Price + Country -->
       <div class="row">
-        <!-- Price -->
         <div class="mb-3 col-md-4">
-          <label for="price" class="form-label">Price</label>
+          <label for="price" class="form-label">Price (&#x20B9; / night)</label>
           <input
             type="number"
             id="price"
             name="listing[price]"
             value="<%= listing.price %>"
+            min="1"
             class="form-control"
             required
-            min="1"
           />
-          <div class="valid-feedback">Price looks good!</div>
           <div class="invalid-feedback">Please enter a valid price.</div>
         </div>
-        <!-- Country -->
+
         <div class="mb-3 col-md-8">
           <label for="country" class="form-label">Country</label>
           <input
@@ -86,13 +94,12 @@
             class="form-control"
             required
           />
-          <div class="valid-feedback">Country looks good!</div>
           <div class="invalid-feedback">Please enter a country.</div>
         </div>
       </div>
 
       <!-- Location -->
-      <div class="mb-3">
+      <div class="mb-4">
         <label for="location" class="form-label">Location</label>
         <input
           type="text"
@@ -102,12 +109,28 @@
           class="form-control"
           required
         />
-        <div class="valid-feedback">Location looks good!</div>
         <div class="invalid-feedback">Please enter a location.</div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3 addbtn">
+
+      <button type="submit" class="btn addbtn text-white w-100">
         Update Listing
       </button>
     </form>
   </div>
 </div>
+
+<script>
+  // Nayi chuni hui image ka preview
+  const imageInput = document.getElementById("image");
+  const imagePreview = document.getElementById("imagePreview");
+
+  imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    if (file) {
+      imagePreview.src = URL.createObjectURL(file);
+      imagePreview.style.display = "block";
+    } else {
+      imagePreview.style.display = "none";
+    }
+  });
+</script>

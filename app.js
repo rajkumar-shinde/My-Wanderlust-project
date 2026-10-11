@@ -103,12 +103,11 @@ app.all("/{*splat}", (req, res, next) => {
   next(new ExpressError(404, "Page not Found!"));
 });
 
+// Error handler
 app.use((err, req, res, next) => {
-  let { status = 500, message = "something wrong" } = err;
-  res.status(status).render("./listings/error.ejs", { err });
-  // res.status(status).send(message);
+  let { status = 500, message = "Something went wrong" } = err;
+  res.status(status).render("error.ejs", { err: { status, message } });
 });
-
 // Server
 app.listen(8000, () => {
   console.log("App is listening on port 8000...");

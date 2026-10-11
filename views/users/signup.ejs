@@ -1,8 +1,12 @@
 <% layout("layouts/boilerplate") %>
-<div class="row mt-3">
-  <h1 class="col-6 offset-3">SignUp On Wanderlust</h1>
-  <div class="col-6 offset-3">
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2 class="auth-title">Join WanderLust</h2>
+    <p class="auth-subtitle">Create an account to host and review stays</p>
+
     <form action="/signup" method="post" class="needs-validation" novalidate>
+      <!-- Username -->
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input
@@ -14,7 +18,9 @@
           maxlength="20"
           pattern="[a-zA-Z0-9_]{3,20}"
           title="Username must be 3-20 characters. Only letters, numbers, and underscores (_) are allowed."
+          autocomplete="username"
           class="form-control"
+          placeholder="Choose a username"
         />
         <div class="invalid-feedback">
           Username must be 3-20 characters long. Only letters, numbers, and
@@ -22,6 +28,8 @@
         </div>
         <div class="valid-feedback">Username looks good!</div>
       </div>
+
+      <!-- Email -->
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input
@@ -29,25 +37,40 @@
           id="email"
           name="email"
           required
-          pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+          pattern="[a-zA-Z0-9._%+\-]+@gmail\.com"
           title="Please enter a valid Gmail address ending with @gmail.com"
+          autocomplete="email"
           class="form-control"
+          placeholder="yourname@gmail.com"
         />
         <div class="invalid-feedback">
           Please enter a valid email ending with @gmail.com.
         </div>
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">password</label>
+
+      <!-- Password -->
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           required
+          minlength="6"
+          autocomplete="new-password"
           class="form-control"
+          placeholder="At least 6 characters"
         />
+        <div class="invalid-feedback">
+          Password must be at least 6 characters long.
+        </div>
       </div>
-      <button class="btn btn-success">SignUp</button>
+
+      <button class="btn addbtn text-white w-100">Sign Up</button>
     </form>
+
+    <p class="auth-switch">
+      Already have an account? <a href="/login">Log in</a>
+    </p>
   </div>
 </div>

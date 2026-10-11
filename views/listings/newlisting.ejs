@@ -1,107 +1,123 @@
 <% layout("layouts/boilerplate") %>
-<div class="row mt-3">
-  <div class="col-8 offset-2">
-    <h1>Create a new Listing</h1>
-    <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
+
+<div class="form-wrapper">
+  <div class="form-card">
+    <h2 class="auth-title">Host your home</h2>
+    <p class="auth-subtitle">Fill in the details to create a new listing</p>
+
+    <form
+      method="POST"
+      action="/listings"
+      class="needs-validation"
+      novalidate
+      enctype="multipart/form-data"
+    >
+      <!-- Title -->
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
           type="text"
           id="title"
           name="listing[title]"
-          placeholder="Enter title"
+          placeholder="e.g. Beachfront Villa in Goa"
           required
           class="form-control"
         />
-        <div class="valid-feedback">Title looks good!</div>
         <div class="invalid-feedback">Please enter a title.</div>
       </div>
 
+      <!-- Description -->
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea
           id="description"
           name="listing[description]"
-          placeholder="Enter description"
+          rows="4"
+          placeholder="Describe your place"
           required
           class="form-control"
         ></textarea>
-        <div class="valid-feedback">Description looks good!</div>
         <div class="invalid-feedback">Please enter a description.</div>
       </div>
-      <!-- <div class="mb-3">
-        <label for="image" class="form-label">Image URL</label>
-        <input
-          type="text"
-          id="image"
-          name="listing[image][url]"
-          placeholder="Enter image URL"
-          class="form-control"
-        />
-        <div class="valid-feedback">
-          Image URL added. If left empty, the default image will be used.
-        </div>
-      </div> -->
+
+      <!-- Image upload + preview -->
       <div class="mb-3">
         <label for="image" class="form-label">Upload Image</label>
         <input
           type="file"
           id="image"
           name="listing[image][url]"
-          placeholder="Enter image URL"
+          accept="image/*"
           class="form-control"
           required
         />
-        <div class="valid-feedback">
-          Image URL added. If left empty, the default image will be used.
-        </div>
+        <div class="invalid-feedback">Please choose an image.</div>
+        <img id="imagePreview" class="image-preview" alt="Image preview" />
       </div>
+
+      <!-- Price + Country -->
       <div class="row">
         <div class="mb-3 col-md-4">
-          <label for="price" class="form-label">Price</label>
+          <label for="price" class="form-label">Price (&#x20B9; / night)</label>
           <input
             type="number"
-            <%#  type should be number %>
             id="price"
             name="listing[price]"
-            placeholder="Enter price"
-            class="form-control"
+            placeholder="1200"
+            min="1"
             required
+            class="form-control"
           />
-          <div class="valid-feedback">Price looks good!</div>
           <div class="invalid-feedback">Please enter a valid price.</div>
         </div>
+
         <div class="mb-3 col-md-8">
           <label for="country" class="form-label">Country</label>
           <input
             type="text"
             id="country"
             name="listing[country]"
-            placeholder="Enter country"
-            class="form-control"
+            placeholder="e.g. India"
             required
+            class="form-control"
           />
-          <div class="valid-feedback">Country looks good!</div>
           <div class="invalid-feedback">Please enter a country.</div>
         </div>
       </div>
-      <div class="mb-3">
+
+      <!-- Location -->
+      <div class="mb-4">
         <label for="location" class="form-label">Location</label>
         <input
           type="text"
           id="location"
           name="listing[location]"
-          placeholder="Enter location"
-          class="form-control"
+          placeholder="e.g. Calangute, Goa"
           required
+          class="form-control"
         />
-        <div class="valid-feedback">Location looks good!</div>
         <div class="invalid-feedback">Please enter a location.</div>
       </div>
 
-      <button class="btn btn-primary addbtn mt-3" type="submit">
+      <button class="btn addbtn text-white w-100" type="submit">
         Create Listing
       </button>
     </form>
   </div>
 </div>
+
+<script>
+  // Chuni hui image ka preview
+  const imageInput = document.getElementById("image");
+  const imagePreview = document.getElementById("imagePreview");
+
+  imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    if (file) {
+      imagePreview.src = URL.createObjectURL(file);
+      imagePreview.style.display = "block";
+    } else {
+      imagePreview.style.display = "none";
+    }
+  });
+</script>
